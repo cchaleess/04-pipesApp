@@ -1,0 +1,74 @@
+<div class="text-layout">
+  <h1>Pipes Personalizados</h1>
+  <p>Creados por {{ "mi" | mayusculas: enMayuscula }}</p>
+
+  
+</div>
+
+<p-toolbar>
+<p-button
+    label="Cambiar a mayúsculas"
+    [icon]="'pieces'"
+    [iconPos]="'right'"
+    [disabled]="false"
+    (onClick)="cambiarMayusculas()"
+  >
+  </p-button>
+
+  <div class="p-toolbar-group-left"></div>
+
+  <div class="p-toolbar-group-right">
+
+    <button pButton 
+        type="button" 
+        label="toggle mayusculas" 
+        class="mr-1 p-button-warning"></button>
+    <button pButton 
+        type="button" 
+        icon="pi pi-sort" 
+        label="por nombre" 
+        class="mr-1"
+        (click)="cambiarOrden('nombre')"
+        ></button>
+    <button pButton 
+        type="button" 
+        icon="pi pi-sort" 
+        label="Vuela" 
+        class="mr-1 p-button-success"
+        (click)="cambiarOrden('vuela')"
+        ></button>
+    <button pButton 
+        type="button" 
+        icon="pi pi-sort" 
+        label="Por color" 
+        class="mr-1 p-button-help"
+        (click)="cambiarOrden('color')"
+        ></button>
+    
+</div>
+</p-toolbar>
+
+<div class="p-grid">
+    <div class="col-12 mt-3">
+        <p-table [value]="heroes | ordenar: ordenarPor" [paginator]="true" [rows]="10">
+           <ng-template pTemplate = "header">
+                <tr>
+                    <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
+                    <th pSortableColumn="vuela">Vuela<p-sortIcon field="vuela"></p-sortIcon></th>
+                    <th pSortableColumn="color">Color<p-sortIcon field="color"></p-sortIcon></th>
+                 
+                    
+                </tr>
+           </ng-template>
+           <ng-template pTemplate = "body" let-heroe>
+                <tr>
+                    <th>{{heroe.nombre}}</th>
+                    <th>{{heroe.vuela | vuela | titlecase}}</th>
+                    <th>{{heroe.color}}</th>
+                </tr>
+           </ng-template>
+        </p-table>
+            
+    </div>
+
+</div>
